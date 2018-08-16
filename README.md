@@ -22,6 +22,18 @@ What's the solution?
 
 ***
 
+## **Requirements**
+
+1. #### Basic AWS knowledge.
+ - How to create a public bucket.
+ - How to forward the bucket through CloudFront.
+1. #### A server with MySQL & PHP 7+.
+1. #### Basic Google API knowledge.
+ - Getting the API from your developers account.
+
+***
+
 ## **Installation**
 
-Nothing yet. Come back later.
+1. #### Clone it.
+2. #### Run `composer update`.
