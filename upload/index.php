@@ -10,7 +10,7 @@
  *
  */
 
-require_once(__DIR__.'/inc/config.php');
+require_once(__DIR__.'/../inc/config.php');
 
 ?>
 <!DOCTYPE html>
@@ -36,11 +36,11 @@ require_once(__DIR__.'/inc/config.php');
             MemePage
           </a>
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-              <a href="./upload" class="nav-link">Upload</a>
+              <a class="nav-link" href="../">Home</a>
+            </li>
+            <li class="nav-item active">
+              <a href="./upload" class="nav-link">Upload <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled">NSFW 👉👌</a>
@@ -50,9 +50,9 @@ require_once(__DIR__.'/inc/config.php');
       </div>
     </nav>
     <div class="container">
-      <h1>browse by tag 🤣</h1>
+      <h1>upload box 🤔</h1>
       <div class="card">
-        list tags here
+        drag & drop files here
       </div>
     </div>
   </body>
