@@ -17,6 +17,7 @@ require_once(__DIR__.'/inc/config.php');
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemePage</title>
     <link rel="stylesheet" href="//cdn.thomasj.me/assets/css/bootstrap4.1.min.css">
 
