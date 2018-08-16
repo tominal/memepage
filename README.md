@@ -24,12 +24,12 @@ What's the solution?
 
 ## **Requirements**
 
-1. #### Basic AWS knowledge.
- - How to create a public bucket.
- - How to forward the bucket through CloudFront.
-1. #### A server with MySQL & PHP 7+.
-1. #### Basic Google API knowledge.
- - Getting the API from your developers account.
+* #### Basic AWS knowledge.
+    * How to create a public bucket.
+    * How to forward the bucket through CloudFront.
+* #### A server with MySQL & PHP 7+.
+* #### Basic Google API knowledge.
+    * Getting the API from your developers account.
 
 ***
 
