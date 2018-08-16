@@ -31,7 +31,10 @@ require_once(__DIR__.'/inc/config.php');
       </button>
       <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
-          <a class="navbar-brand">MemePage</a>
+          <a class="navbar-brand">
+            <img src="https://cdn.thomasj.me/assets/img/pepe32.png" alt="">
+            MemePage
+          </a>
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
