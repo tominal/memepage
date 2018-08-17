@@ -8,7 +8,9 @@ $keyname        = '';
 $cloudfrontLink = '';
 
 // Google API secret token
+$googleId       = '';
 $googleSecret   = '';
+$googleRedirect = '';
 
 // MySQL database credentials
 $host           = 'localhost';
