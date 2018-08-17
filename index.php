@@ -10,7 +10,10 @@
  *
  */
 
+ini_set("display_errors", "-1");
+
 require_once(__DIR__.'/inc/devconfig.php');
+require_once(__DIR__.'/inc/auth.php');
 require_once(__DIR__.'/inc/helpers.php');
 
 ?>
@@ -30,5 +33,6 @@ require_once(__DIR__.'/inc/helpers.php');
     <div class="container">
       <?php page(); ?>
     </div>
+    <?php var_dump($_SESSION); ?>
   </body>
 </html>

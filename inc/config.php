@@ -10,7 +10,7 @@ $cloudfrontLink = '';
 // Google API secret token
 $googleId       = '';
 $googleSecret   = '';
-$googleRedirect = '';
+$googleRedirect = ''; // the script handles the redirect for you. append ?page=googleRedirect to your URL
 
 // MySQL database credentials
 $host           = 'localhost';
