@@ -3,6 +3,7 @@
 $page = $_GET['page'] ? $_GET['page'] : 'index';
 
 function page() {
+  global $page;
   require_once __DIR__."/views/$page.php";
 }
 
