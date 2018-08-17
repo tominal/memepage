@@ -29,10 +29,6 @@ require_once(__DIR__.'/inc/helpers.php');
     <?php require(__DIR__.'/inc/nav.php'); ?>
     <div class="container">
       <?php page(); ?>
-      <h1>browse by tag 🤣</h1>
-      <div class="card">
-        list tags here
-      </div>
     </div>
   </body>
 </html>

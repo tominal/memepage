@@ -1,5 +1,6 @@
 <?php
 
 function page() {
-  if(isset($_GET['page'])) include 'index.php';
+  $page = $_GET['page'] ? $_GET['page'] : 'index';
+  require_once __DIR__."/views/$page.php";
 }
