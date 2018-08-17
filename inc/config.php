@@ -1,19 +1,19 @@
 <?php
-
+include __DIR__.'/devconfig.php';
 // AWS bucket info
-$aws_bucket     = 'memescdn.thomasj.me';
-$keyname        = '';
+// $aws_bucket     = 'memescdn.thomasj.me';
+// $keyname        = '';
 
 // CloudFront domain
-$cloudfrontLink = '';
+// $cloudfrontLink = '';
 
 // Google API secret token
-$googleId       = '';
-$googleSecret   = '';
-$googleRedirect = ''; // the script handles the redirect for you. append ?page=googleRedirect to your URL
+// $googleId       = '';
+// $googleSecret   = '';
+// $googleRedirect = ''; // the script handles the redirect for you. append ?page=googleRedirect to your URL
 
 // MySQL database credentials
-$host           = 'localhost';
-$db             = 'memes';
-$user           = 'memes';
-$pass           = 'superBigPassword69!!!';
+// $host           = 'localhost';
+// $db             = 'memes';
+// $user           = 'memes';
+// $pass           = 'superBigPassword69!!!';
