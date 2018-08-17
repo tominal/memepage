@@ -9,18 +9,18 @@
         MemePage
       </a>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <li class="nav-item <?= active('index') ?>">
           <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= active('upload') ?>">
           <a href="./?page=upload" class="nav-link">Upload</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <?= active('nsfw') ?>">
           <a class="nav-link disabled">NSFW 👉👌</a>
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item <?= active('login') ?>">
           <a href="./?page=login" class="nav-link">Login</a>
         </li>
       </ul>
