@@ -11,6 +11,7 @@
  */
 
 require_once(__DIR__.'/inc/config.php');
+require_once(__DIR__.'/inc/helpers.php');
 
 ?>
 <!DOCTYPE html>
@@ -25,31 +26,9 @@ require_once(__DIR__.'/inc/config.php');
     <script src="//cdn.thomasj.me/assets/js/bootstrap4.1.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="container">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <a class="navbar-brand">
-            <img src="https://cdn.thomasj.me/assets/img/pepe32.png" alt="">
-            MemePage
-          </a>
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a href="./upload" class="nav-link">Upload</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">NSFW 👉👌</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php require(__DIR__.'/inc/nav.php'); ?>
     <div class="container">
+      <?php page(); ?>
       <h1>browse by tag 🤣</h1>
       <div class="card">
         list tags here

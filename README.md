@@ -31,8 +31,6 @@ What's the solution?
 * #### Basic Google API knowledge.
     * Getting the API from your developers account.
 
-***
-
 ## **Installation**
 
 1. #### Clone it.
