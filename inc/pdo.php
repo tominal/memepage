@@ -16,13 +16,12 @@ class conn {
     $this->user = $user;
     $this->pass = $pass;
 
-    $this->query("CREATE TABLE IF NOT EXISTS `users` (
-      `id` int(11) auth_increment not null,
+    var_dump($this->query("CREATE TABLE IF NOT EXISTS `users` (
+      `id` int(11) auto_increment primary key not null,
       `name` varchar(50) not null,
       `email` varchar(50) not null,
-      `scope` int(1) not null default(0),
-      PRIMARY KEY (`id`)
-    );");
+      `scope` int(1) not null default 0
+    );"));
   }
 
   public function query($sql){
