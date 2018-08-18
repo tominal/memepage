@@ -29,7 +29,7 @@ function url3986_encode($str){
 function impCols($arr){
   $str = "";
   foreach($arr as $k => $v){
-    $str += ($k == (count($arr)-1) ? $v : $v.', ');
+    $str .= ($k == (count($arr)-1) ? $v : $v.', ');
   }
   return $str;
 }
@@ -37,6 +37,6 @@ function impCols($arr){
 function qs($arr){
   $str = '';
   for($i = 1;$i <= count($arr);$i++)
-    $str += ($i == count($arr) ? '?' : '?, ');
+    $str .= ($i == count($arr) ? '?' : '?, ');
   return $str;
 }
