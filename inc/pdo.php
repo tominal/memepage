@@ -21,9 +21,13 @@ class conn {
       `id` int(11) auto_increment primary key not null,
       `name` varchar(50) not null,
       `avi` varchar(255),
-      `email` varchar(50) not null,
+      `email` varchar(50) not null unique,
       `scope` int(1) not null default 0
     );");
+  }
+
+  public function getPdo(){
+    return new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
   }
 
   public function query($sql){
@@ -43,8 +47,7 @@ class conn {
     $results = null;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
-      var_dump(impCols($cols)." Qs: ".qs($vals));
-      $insert = $pdo->prepare('INSERT INTO `$table` ('.impCols($cols).') VALUES ('.qs($vals).')');
+      $insert = $pdo->prepare('INSERT INTO `'.$table.'` ('.impCols($cols).') VALUES ('.qs($vals).')');
       $insert->execute($vals);
       $results = $insert->fetchAll();
       $pdo = null;
