@@ -33,19 +33,33 @@ class google {
   }
 
   public function handle($code){
-    $data = $this->getAccessToken($code);
+    $token = $this->getAccessToken($code);
+    $user = $this->getUserInfo($token);
     var_dump("authenticated");die();
   }
 
-  public function getAccessToken($code){
+  private function getAccessToken($code){
     $post = 'client_id='.$this->gId.'&redirect_uri='.$this->gRedir.'&client_secret='.$this->gSec.'&code='.$code.'&grant_type=authorization_code';
     $ch = curl_init("https://www.googleapis.com/oauth2/v4/token");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
     $data = json_decode(curl_exec($ch),1);
-    if(curl_errno())
+    if(curl_errno($ch))
       throw new \Exception('Error aquiring access token from Google');
+    curl_close($ch);
+
+    return $data["access_token"];
+  }
+
+  private function getUserInfo($t){
+    $ch = curl_init("https://www.googleapis.com/plus/v1/people/me");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer '.$t]);
+    $data = json_decode(curl_exec($ch),1);
+    if(curl_errno($ch))
+      throw new \Exception('Error aquiring user information from Google');
+    curl_close($ch);
 
     var_dump($data);die();
   }
