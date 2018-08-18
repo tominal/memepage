@@ -46,7 +46,7 @@ class google {
     $user = $this->getUserInfo($token);
     // find user in mysql database
     var_dump("authenticated");
-    var_dump($this->conn->insert("users", ['name', 'avi', 'email'], [$user["displayName"], $user["avi"], $user["email"]]));die();
+    var_dump($this->conn->insert("users", ['name', 'avi', 'email'], [$user["displayName"], $user["avi"], $user["emails"][0]["value"]]));die();
   }
 
   private function getAccessToken($code){
@@ -71,7 +71,7 @@ class google {
     if(curl_errno($ch))
       throw new \Exception('Error aquiring user information from Google');
     curl_close($ch);
-    var_dump($data);
+    var_dump(json_encode($data));
     return $data;
   }
 }
