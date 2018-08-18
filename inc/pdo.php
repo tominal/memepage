@@ -43,10 +43,10 @@ class conn {
     $results = null;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
-      var_dump(impCols($cols)." Qs: ".qs($vals));die();
+      var_dump(impCols($cols)." Qs: ".qs($vals));
       $insert = $pdo->prepare('INSERT INTO `$table` ('.impCols($cols).') VALUES ('.qs($vals).')');
-      $insert->exec($vals);
-      $results = $insert->fetch(PDO::FETCH_ASSOC);
+      $insert->execute($vals);
+      $results = $insert->fetchAll();
       $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
