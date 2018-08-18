@@ -25,3 +25,18 @@ function url3986_encode($str){
   $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
   return str_replace($entities, $replacements, urlencode($str));
 }
+
+function impCols($arr){
+  $str = "";
+  foreach($arr as $k => $v){
+    $str += ($k == (count($arr)-1) ? $v : $v.', ');
+  }
+  return $str;
+}
+
+function qs($arr){
+  $str = '';
+  for($i = 1;$i <= count($arr);$i++)
+    $str += ($i == count($arr) ? '?' : '?, ');
+  return $str;
+}

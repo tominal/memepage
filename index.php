@@ -12,9 +12,9 @@
 
 ini_set("display_errors", "-1");
 
+require_once(__DIR__.'/inc/helpers.php');
 require_once(__DIR__.'/inc/pdo.php');
 require_once(__DIR__.'/inc/auth.php');
-require_once(__DIR__.'/inc/helpers.php');
 
 ?>
 <!DOCTYPE html>
