@@ -1,5 +1,5 @@
 <?php
-// create a session so the admin can view some cute sql analytics
+// create a session so the admin can potentially view some cute sql analytics
 
 session_start();
 
@@ -38,10 +38,19 @@ class google {
 
   public function handle($code){
     $token = $this->getAccessToken($code);
-    $user = $this->getUserInfo($token);
-    // find user in mysql database
-    var_dump("authenticated");
-    $this->conn->insert("users", ['name', 'avi', 'email'], [$user["displayName"], $user["image"]["url"], $user["emails"][0]["value"]]);
+    $google = $this->getUserInfo($token);
+    // if user exists, update him
+    $user = $this->conn->select("email, scope", "users", ["email" => $google["emails"][0]["value"]]);
+    if($user)
+      // $this->conn->update("users", ["la" => time()], ["email" => $google["emails"][0]["value"]]); // work on this next
+      echo "update user";
+    else // else, create him
+      $this->conn->insert("users", ['name', 'avi', 'email'], [$google["displayName"], $google["image"]["url"], $google["emails"][0]["value"]]);
+    // then create a session for this beautiful user
+    $_SESSION['logged_in'] = 1;
+    $_SESSION['scope'] = $user["scope"];
+    header('Location: ./');
+    exit;
   }
 
   private function getAccessToken($code){

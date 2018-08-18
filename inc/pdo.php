@@ -38,7 +38,28 @@ class conn {
       $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
-      die();
+      exit;
+    }
+    return $results;
+  }
+
+  public function select($cols, $table, $where){
+    $results = null;
+    try {
+      $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
+      if(count($where)>0 && $w = key($where)){
+        $sql = 'SELECT '.(is_array($cols)?impCols($cols):$cols).' FROM `'.$table.'` WHERE '.$w.' = :where';
+        $sel = $pdo->prepare($sql);
+        $sel->bindParam(':where', $where[$w]);
+        $sel->execute();
+        $results = $sel->fetch(PDO::FETCH_ASSOC);
+      } else {
+        $sql = 'SELECT '.(is_array($cols)?impCols($cols):$cols).' FROM '.$table;
+        $results = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+      }
+    } catch(PDOException $e){
+      print "Error: ".$e->getMessage();
+      exit;
     }
     return $results;
   }
@@ -53,7 +74,7 @@ class conn {
       $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
-      die();
+      exit;
     }
     return $results;
   }
