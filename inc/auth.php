@@ -40,7 +40,7 @@ class google {
     $token = $this->getAccessToken($code);
     $user = $this->getUserInfo($token);
     // find user in mysql database
-    var_dump($this->conn->query("SELECT * FROM `users`"));die();
+    var_dump($this->conn->query("SELECT * FROM `users`")->fetch());die();
     var_dump("authenticated");
   }
 
