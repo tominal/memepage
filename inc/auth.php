@@ -12,3 +12,27 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1){
 }
 
 $_SESSION['la'] = time();
+
+// create classes to handle authentication
+
+class google {
+  private $gId;
+  private $gSec;
+  private $gRedir;
+
+  public function __construct(){
+    require(__DIR__.'/config.php');
+
+    $this->gId = $googleId;
+    $this->gSec = $googleSecret;
+    $this->gRedir = $googleRedirect;
+  }
+
+  public function getLink(){
+    return 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode($this->gRedir) . '&response_type=code&client_id=' . $this->gId . '&access_type=online';
+  }
+
+  public function handle(){
+    var_dump("authenticated");die();
+  }
+}

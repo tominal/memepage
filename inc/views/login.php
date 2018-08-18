@@ -1,10 +1,10 @@
 <?php
 
-// if(isset($_POST['google']))
+$google = new google();
 
 ?>
 
 <h1>choose how to log in</h1>
-<p>google</p>
+<p><a href="<?= $google->getLink(); ?>">google</a></p>
 <p>discord?</p>
 <p>what else do the hip kids use</p>
