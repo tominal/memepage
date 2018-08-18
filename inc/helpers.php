@@ -25,8 +25,3 @@ function url3986_encode($str){
   $replacements = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
   return str_replace($entities, $replacements, urlencode($str));
 }
-
-function googleLogin(){
-  // $scope = urlencode
-  // return 'https://accounts.google.com/o/oauth2/v2/auth?scope='.urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me')
-}
