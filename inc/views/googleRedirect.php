@@ -3,4 +3,4 @@
 $google = new google();
 
 if(isset($_GET['code']))
-  $google->handle();
+  $google->handle($_GET['code']);
