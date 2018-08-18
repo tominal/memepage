@@ -36,12 +36,17 @@ class google {
     return 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode($this->gRedir) . '&response_type=code&client_id=' . $this->gId . '&access_type=online';
   }
 
+  public function testInjection(){
+    $users = $this->conn->query("SELECT * FROM `users`");
+    var_dump($users);die();
+  }
+
   public function handle($code){
     $token = $this->getAccessToken($code);
     $user = $this->getUserInfo($token);
     // find user in mysql database
-    var_dump($this->conn->query("SELECT * FROM `users`")->fetch());die();
     var_dump("authenticated");
+    var_dump($this->conn->insert("users", ['name', 'avi', 'email'], [$user["displayName"], $user["avi"], $user["email"]]));die();
   }
 
   private function getAccessToken($code){
@@ -66,7 +71,7 @@ class google {
     if(curl_errno($ch))
       throw new \Exception('Error aquiring user information from Google');
     curl_close($ch);
-
+    var_dump($data);
     return $data;
   }
 }

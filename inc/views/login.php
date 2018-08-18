@@ -2,6 +2,7 @@
 
 $google = new google($GLOBALS['conn']);
 
+$google->testInjection();
 ?>
 
 <h1>choose how to log in</h1>

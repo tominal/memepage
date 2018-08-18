@@ -27,13 +27,31 @@ class conn {
   }
 
   public function query($sql){
+    $results = null;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
-      return $pdo->query($sql);
+      $results = $pdo->query($sql)->fetchAll();
+      $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
       die();
     }
+    return $results;
+  }
+
+  public function insert($table, $cols, $vals){
+    $results = null;
+    try {
+      $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
+      $insert = $pdo->prepare('INSERT INTO `$table` ('.impCols($cols).') VALUES ('.qs($vals).')');
+      $insert->exec($vals);
+      $results = $insert->fetch(PDO::FETCH_ASSOC);
+      $pdo = null;
+    } catch(PDOException $e){
+      print "Error: ".$e->getMessage();
+      die();
+    }
+    return $results;
   }
 }
 
