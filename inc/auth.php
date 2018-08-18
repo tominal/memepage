@@ -20,8 +20,12 @@ class google {
   private $gSec;
   private $gRedir;
 
-  public function __construct(){
+  protected $conn;
+
+  public function __construct($conn){
     require(__DIR__.'/config.php');
+
+    $this->conn = $conn;
 
     $this->gId = $googleId;
     $this->gSec = $googleSecret;
@@ -35,7 +39,9 @@ class google {
   public function handle($code){
     $token = $this->getAccessToken($code);
     $user = $this->getUserInfo($token);
-    var_dump("authenticated");die();
+    // find user in mysql database
+    var_dump($this->conn->query("SELECT * FROM `users`"));die();
+    var_dump("authenticated");
   }
 
   private function getAccessToken($code){
@@ -61,6 +67,6 @@ class google {
       throw new \Exception('Error aquiring user information from Google');
     curl_close($ch);
 
-    var_dump($data);die();
+    return $data;
   }
 }

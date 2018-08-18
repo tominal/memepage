@@ -20,6 +20,7 @@ class conn {
     $this->query("CREATE TABLE IF NOT EXISTS `users` (
       `id` int(11) auto_increment primary key not null,
       `name` varchar(50) not null,
+      `avi` varchar(255),
       `email` varchar(50) not null,
       `scope` int(1) not null default 0
     );");

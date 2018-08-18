@@ -1,6 +1,6 @@
 <?php
 
-$google = new google();
+$google = new google($GLOBALS['conn']);
 
 ?>
 
