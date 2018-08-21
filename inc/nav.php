@@ -25,9 +25,11 @@
             <a href="./?page=login" class="nav-link">Login</a>
           </li>
         <?php } else { ?>
-          <li class="nav-item <?= active('admin') ?>">
-            <a href="./?page=admin" class="nav-link">Admin</a>
-          </li>
+          <?php if($_SESSION['scope'] == 1){ ?>
+            <li class="nav-item <?= active('admin') ?>">
+              <a href="./?page=admin" class="nav-link">Admin</a>
+            </li>
+          <?php } ?>
           <li class="nav-item <?= active('logout') ?>">
             <a href="./?page=logout" class="nav-link">Logout</a>
           </li>

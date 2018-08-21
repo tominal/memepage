@@ -45,6 +45,7 @@ class google {
         $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
       $_SESSION['logged_in'] = 1;
       $_SESSION['scope'] = $user['scope'];
+      var_dump($user['scope']);die();
       header('Location: ./');
       exit;
     }
@@ -56,13 +57,12 @@ class google {
     // if user exists, update him
     $user = $this->conn->select("email, scope", "users", ["email" => $google["emails"][0]["value"]]);
     if($user)
-      // $this->conn->update("users", ["la" => time()], ["email" => $google["emails"][0]["value"]]); // work on this next
-      echo "update user";
+      $this->conn->update("users", ["la"], ["email"], [time(), $google["emails"][0]["value"]]);
     else // else, create him
       $this->conn->insert("users", ['name', 'avi', 'email'], [$google["displayName"], $google["image"]["url"], $google["emails"][0]["value"]]);
     // then create a session for this beautiful user
     $_SESSION['logged_in'] = 1;
-    $_SESSION['scope'] = $user["scope"];
+    $_SESSION['scope'] = $user['scope'];
     header('Location: ./');
     exit;
   }
