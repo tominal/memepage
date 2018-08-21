@@ -22,7 +22,8 @@ class conn {
       `name` varchar(50) not null,
       `avi` varchar(255),
       `email` varchar(50) not null unique,
-      `scope` int(1) not null default 0
+      `scope` int(1) not null default 0,
+      `la` int(11)
     );");
   }
 
@@ -65,18 +66,33 @@ class conn {
   }
 
   public function insert($table, $cols, $vals){
-    $results = null;
+    $status = false;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
       $insert = $pdo->prepare('INSERT INTO `'.$table.'` ('.impCols($cols).') VALUES ('.qs($vals).')');
       $insert->execute($vals);
-      $results = $insert->fetchAll();
+      $status = true;
       $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
       exit;
     }
-    return $results;
+    return $status;
+  }
+
+  public function update($table, $set, $where, $vals){
+    $status = false;
+    try {
+      $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
+      $upd = $pdo->prepare('UPDATE `'.$table.'` SET '.umpCols($set).' WHERE '.umpCols($where));
+      $upd->execute($vals);
+      $status = true;
+      $pdo = null;
+    } catch (PDOException $e){
+      print "Error: ".$e->getMessage();
+      exit;
+    }
+    return $status;
   }
 }
 

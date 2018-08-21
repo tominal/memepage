@@ -34,9 +34,28 @@ function impCols($arr){
   return $str;
 }
 
+// return
+function umpCols($arr){
+  $str = "";
+  $c = count($arr);
+  if($c > 0){
+    foreach($arr as $k => $v)
+      $str .= $v.' = ?'.($c == $k+1 ? ', ' : '');
+  } else
+    $str = $v.' = ?';
+  return $str;
+}
+
+// return string of question marks for insert statement
 function qs($arr){
   $str = '';
   for($i = 1;$i <= count($arr);$i++)
     $str .= ($i == count($arr) ? '?' : '?, ');
   return $str;
+}
+
+// delete session
+function logout(){
+  session_destroy();
+  header('Location: ./');
 }

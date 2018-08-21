@@ -36,6 +36,20 @@ class google {
     return 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode($this->gRedir) . '&response_type=code&client_id=' . $this->gId . '&access_type=online';
   }
 
+  public function localhost(){
+    if($_SERVER['HTTP_HOST'] == 'memes.localhost'){
+      $user = $this->conn->select("email, scope", "users", ["email" => "tom@thomasj.me"]);
+      if($user)
+        $this->conn->update("users", ["la"], ["email"], [time(), "tom@thomasj.me"]);
+      else
+        $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
+      $_SESSION['logged_in'] = 1;
+      $_SESSION['scope'] = $user['scope'];
+      header('Location: ./');
+      exit;
+    }
+  }
+
   public function handle($code){
     $token = $this->getAccessToken($code);
     $google = $this->getUserInfo($token);

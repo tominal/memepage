@@ -20,9 +20,18 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item <?= active('login') ?>">
-          <a href="./?page=login" class="nav-link">Login</a>
-        </li>
+        <?php if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== 1){ ?>
+          <li class="nav-item <?= active('login') ?>">
+            <a href="./?page=login" class="nav-link">Login</a>
+          </li>
+        <?php } else { ?>
+          <li class="nav-item <?= active('admin') ?>">
+            <a href="./?page=admin" class="nav-link">Admin</a>
+          </li>
+          <li class="nav-item <?= active('logout') ?>">
+            <a href="./?page=logout" class="nav-link">Logout</a>
+          </li>
+        <?php } ?>
       </ul>
     </div>
   </div>
