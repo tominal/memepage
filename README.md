@@ -16,7 +16,7 @@ Let's track this tumor together shall we?
 What's the solution?
 
 1. Log in through a cute panel via google preferably.
-1. Drag memes into a box just like Dropbox.
+1. Drag memes into a dropzone js box just like Dropbox.
 1. JavaScript takes over and thumbnails/uploads files to AWS bucket.
 1. Bucket is used as a CDN through CloudFront -> CloudFlare.
 

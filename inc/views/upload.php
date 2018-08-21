@@ -25,6 +25,9 @@
       <div class="upload">
         drag & drop files here
       </div>
+	  <script>
+		<!-- dropzone js here -->
+	  </script>
     <?php } ?>
   <?php } ?>
 </div>
