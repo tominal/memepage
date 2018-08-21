@@ -11,7 +11,7 @@ Let's track this tumor together shall we?
 
 ***
 
-### **Don't expect updates to this. This is a solution to my hard drive problem not a product.**
+### **Don't expect updates to this. This is a solution to my hard drive problem not a product. I also suck at making readable code when I'm not paid. Sorry :v**
 
 What's the solution?
 
@@ -29,7 +29,10 @@ What's the solution?
     * How to forward the bucket through CloudFront.
 * #### A server with MySQL & PHP 7+.
 * #### Basic Google API knowledge.
-    * Getting the API from your developers account.
+    * Create a Google + API project.
+    * Set up your OAuth consent screen.
+    * Create your OAuth 2 credentials.
+    * Paste your Client ID, Client Secret, & Redirect URL into ```inc/config.php```
 
 ## **Installation**
 
