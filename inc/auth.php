@@ -45,7 +45,6 @@ class google {
         $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
       $_SESSION['logged_in'] = 1;
       $_SESSION['scope'] = $user['scope'];
-      var_dump($user['scope']);die();
       header('Location: ./');
       exit;
     }
