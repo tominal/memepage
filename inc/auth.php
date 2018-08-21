@@ -44,7 +44,7 @@ class google {
       else
         $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
       $_SESSION['logged_in'] = 1;
-      $_SESSION['scope'] = $user['scope'];
+      $_SESSION['scope'] = (int)$user['scope'];
       header('Location: ./');
       exit;
     }
@@ -61,7 +61,7 @@ class google {
       $this->conn->insert("users", ['name', 'avi', 'email'], [$google["displayName"], $google["image"]["url"], $google["emails"][0]["value"]]);
     // then create a session for this beautiful user
     $_SESSION['logged_in'] = 1;
-    $_SESSION['scope'] = $user['scope'];
+    $_SESSION['scope'] = (int)$user['scope'];
     header('Location: ./');
     exit;
   }

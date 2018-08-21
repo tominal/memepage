@@ -1,6 +1,6 @@
 <style>
   .upload {
-    padding: 40px 15px; 
+    padding: 40px 15px;
   }
 </style>
 

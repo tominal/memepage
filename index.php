@@ -35,7 +35,7 @@ require_once(__DIR__.'/inc/auth.php');
       <?php page(); ?>
     </div>
     <div class="footer">
-      <?php echo var_dump($_SESSION); ?>
+      <?php //echo var_dump($_SESSION); ?>
     </div>
   </body>
 </html>
