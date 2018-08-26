@@ -9,20 +9,24 @@ use Aws\S3\Exception\S3Exception;
 
 $s3 = new S3Client([
     'version' => 'latest',
-    'region'  => $aws_region
+    'region'  => $aws_region,
+    'credentials' => [
+      'key' => $aws_key,
+      'secret' => $aws_secret
+    ]
 ]);
 
 try {
+  echo "Uploading...";
     // Upload data.
-    $result = $s3->putObject([
-        'Bucket' => $aws_bucket,
-        'Key'    => $aws_key,
-        'Body'   => 'Hello, world!',
-        'ACL'    => 'public-read'
-    ]);
+    // $result = $s3->putObject([
+    //     'Bucket' => $aws_bucket,
+    //     'Key'    => 'data.txt',
+    //     'Body'   => 'Hello, world!',
+    //     'ACL'    => 'public-read'
+    // ]);
 
-    // Print the URL to the object.
-    echo $result['ObjectURL'] . PHP_EOL;
+    // $url = $result['ObjectURL'];
 } catch (S3Exception $e) {
     echo $e->getMessage() . PHP_EOL;
 }
