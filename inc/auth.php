@@ -13,8 +13,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 1){
 
 $_SESSION['la'] = time();
 
-// create classes to handle authentication
-
+// google authentication handler
 class google {
   private $gId;
   private $gSec;
@@ -22,6 +21,7 @@ class google {
 
   protected $conn;
 
+  // grab those super secret config vars
   public function __construct($conn){
     require(__DIR__.'/config.php');
 
@@ -32,40 +32,7 @@ class google {
     $this->gRedir = $googleRedirect;
   }
 
-  public function getLink(){
-    return 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode($this->gRedir) . '&response_type=code&client_id=' . $this->gId . '&access_type=online';
-  }
-
-  public function localhost(){
-    if($_SERVER['HTTP_HOST'] == 'memes.localhost'){
-      $user = $this->conn->select("email, scope", "users", ["email" => "tom@thomasj.me"]);
-      if($user)
-        $this->conn->update("users", ["la"], ["email"], [time(), "tom@thomasj.me"]);
-      else
-        $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
-      $_SESSION['logged_in'] = 1;
-      $_SESSION['scope'] = (int)$user['scope'];
-      header('Location: ./');
-      exit;
-    }
-  }
-
-  public function handle($code){
-    $token = $this->getAccessToken($code);
-    $google = $this->getUserInfo($token);
-    // if user exists, update him
-    $user = $this->conn->select("email, scope", "users", ["email" => $google["emails"][0]["value"]]);
-    if($user)
-      $this->conn->update("users", ["la"], ["email"], [time(), $google["emails"][0]["value"]]);
-    else // else, create him
-      $this->conn->insert("users", ['name', 'avi', 'email'], [$google["displayName"], $google["image"]["url"], $google["emails"][0]["value"]]);
-    // then create a session for this beautiful user
-    $_SESSION['logged_in'] = 1;
-    $_SESSION['scope'] = (int)$user['scope'];
-    header('Location: ./');
-    exit;
-  }
-
+  // request access token from google
   private function getAccessToken($code){
     $post = 'client_id='.$this->gId.'&redirect_uri='.$this->gRedir.'&client_secret='.$this->gSec.'&code='.$code.'&grant_type=authorization_code';
     $ch = curl_init("https://www.googleapis.com/oauth2/v4/token");
@@ -80,6 +47,7 @@ class google {
     return $data["access_token"];
   }
 
+  // request google + user info with access token
   private function getUserInfo($t){
     $ch = curl_init("https://www.googleapis.com/plus/v1/people/me");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -90,5 +58,42 @@ class google {
     curl_close($ch);
 
     return $data;
+  }
+
+  // link to your google consent screen
+  public function getLink(){
+    return 'https://accounts.google.com/o/oauth2/v2/auth?scope=' . urlencode('https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/plus.me') . '&redirect_uri=' . urlencode($this->gRedir) . '&response_type=code&client_id=' . $this->gId . '&access_type=online';
+  }
+
+  // quick login link so i can test security vunerabilities on local machine
+  public function localhost(){
+    if($_SERVER['HTTP_HOST'] == 'memes.localhost'){
+      $user = $this->conn->select("email, scope", "users", ["email" => "tom@thomasj.me"]);
+      if($user)
+        $this->conn->update("users", ["la"], ["email"], [time(), "tom@thomasj.me"]);
+      else
+        $this->conn->insert("users", ['name', 'avi', 'email'], ["thomas", "avi.png", "tom@thomasj.me"]);
+      $_SESSION['logged_in'] = 1;
+      $_SESSION['scope'] = (int)$user['scope'];
+      header('Location: ./');
+      exit;
+    }
+  }
+
+  // handle the redirect from google's consent screen
+  public function handle($code){
+    $token = $this->getAccessToken($code);
+    $google = $this->getUserInfo($token);
+    // if user exists, update him
+    $user = $this->conn->select("email, scope", "users", ["email" => $google["emails"][0]["value"]]);
+    if($user)
+      $this->conn->update("users", ["la"], ["email"], [time(), $google["emails"][0]["value"]]);
+    else // else, create him
+      $this->conn->insert("users", ['name', 'avi', 'email'], [$google["displayName"], $google["image"]["url"], $google["emails"][0]["value"]]);
+    // then create a session for this beautiful user
+    $_SESSION['logged_in'] = 1;
+    $_SESSION['scope'] = (int)$user['scope'];
+    header('Location: ./');
+    exit;
   }
 }
