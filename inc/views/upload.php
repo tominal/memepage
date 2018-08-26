@@ -27,16 +27,31 @@
         you do not have permission to upload here. go away.
       </div>
 
-    <?php } else { ?>
+    <?php } else { include __DIR__.'/../config.php'; ?>
 
       <div class="upload">
-        <form class="dropzone" action="/?page=fileupload" id="myDropzone">
+        <form class="dropzone" action="https://s3.amazonaws.com/<?= $aws_bucket ?>/" id="myDropzone">
 
         </form>
       </div>
-    <script src="//memescdn.thomasj.me/assets/js/dropzone.js" charset="utf-8"></script>
-    <script>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js" charset="utf-8"></script>
+    <script>
+      $.ajaxSetup({
+        beforeSend: function(xhr, type){
+          if (!type.crossDomain)
+            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+        }
+      });
+
+      $(document).ready(function(){
+        // var uploader = new Dropzone('#myDropzone', {
+        //   url: $('#myDropzone').attr('action'),
+        //   method: "post",
+        //
+        // })
+      });
 	  </script>
 
     <?php } ?>
