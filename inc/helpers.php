@@ -10,6 +10,15 @@ function page() {
     require_once __DIR__."/views/404.php";
 }
 
+function xhr(){
+  $xhr = $_GET['xhr'];
+  if(file_exists(__DIR__."/views/$xhr.php"))
+    require_once __DIR__."/views/$xhr.php";
+  else
+    require_once __DIR__."/views/404.php";
+  exit;
+}
+
 function active($pg){
   global $page;
   if($pg == $page)

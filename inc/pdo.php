@@ -24,6 +24,12 @@ class conn {
       `email` varchar(50) not null unique,
       `scope` int(1) not null default 0,
       `la` int(11)
+    ); CREATE TABLE IF NOT EXISTS `images` (
+      `id` int(11) auto_increment primary key not null,
+      `name` varchar(50) not null,
+      `type` varchar(50) not null,
+      `tags` json,
+      `ratings` json
     );");
   }
 

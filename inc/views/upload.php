@@ -10,8 +10,6 @@
 
 <h1>upload box 🤔</h1>
 
-
-
 <div class="card">
   <?php if(!isset($_SESSION['logged_in'])){ ?>
 
@@ -24,34 +22,33 @@
     <?php if($_SESSION['scope'] !== 1){ ?>
 
       <div class="alert alert-warning">
-        you do not have permission to upload here. go away.
+        you have not been given permission to upload here.
       </div>
 
-    <?php } else { include __DIR__.'/../config.php'; ?>
+    <?php } else { ?>
+
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
 
       <div class="upload">
-        <form class="dropzone" action="https://s3.amazonaws.com/<?= $aws_bucket ?>/" id="myDropzone">
+        <form class="dropzone" method="post" enctype="multipart/form-data" action="./?xhr=fileupload" id="memesDropzone">
 
         </form>
       </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js" charset="utf-8"></script>
     <script>
-      $.ajaxSetup({
-        beforeSend: function(xhr, type){
-          if (!type.crossDomain)
-            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+      Dropzone.options.memesDropzone = {
+        paramName: "file",
+        maxFilesize: 5,
+        init: function () {
+          this.on("complete", function (file) {
+            if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+              // doSomething();
+              console.log("Upload done: " + file);
+            }
+          });
         }
-      });
-
-      $(document).ready(function(){
-        // var uploader = new Dropzone('#myDropzone', {
-        //   url: $('#myDropzone').attr('action'),
-        //   method: "post",
-        //
-        // })
-      });
+      };
 	  </script>
 
     <?php } ?>

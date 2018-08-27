@@ -17,6 +17,9 @@ require_once(__DIR__.'/inc/helpers.php');
 require_once(__DIR__.'/inc/pdo.php');
 require_once(__DIR__.'/inc/auth.php');
 
+if(isset($_GET['xhr']))
+  xhr();
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

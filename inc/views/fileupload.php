@@ -16,17 +16,30 @@ $s3 = new S3Client([
     ]
 ]);
 
-try {
-  echo "Uploading...";
-    // Upload data.
-    // $result = $s3->putObject([
-    //     'Bucket' => $aws_bucket,
-    //     'Key'    => 'data.txt',
-    //     'Body'   => 'Hello, world!',
-    //     'ACL'    => 'public-read'
-    // ]);
+if ($_FILES['file']['error'] !== UPLOAD_ERR_OK){
+  echo "no file uwu";
+  exit;
+}
 
-    // $url = $result['ObjectURL'];
+try {
+    $conn = $GLOBALS['conn'];
+
+    // Upload data.
+    $result = $s3->putObject([
+        'Bucket'      => $aws_bucket,
+        'Key'         => 'img/'.$_FILES['file']['name'],
+        'Body'        => file_get_contents($_FILES['file']['tmp_name']),
+        'ContentType' => $_FILES['file']['type']
+    ]);
+
+    $link = isset($aws_cname) && $aws_cname == 1 ? str_replace("s3.amazonaws.com/", "", $result['ObjectURL']) : $result['ObjectURL'];
+
+    // insert into db here
+    $conn->insert('images', ['name', 'type'], [$_FILES['file']['name'], $_FILES['file']['type']]);
+
+    header('Content-Type: text/plain');
+    echo $link;
 } catch (S3Exception $e) {
     echo $e->getMessage() . PHP_EOL;
 }
+exit;
