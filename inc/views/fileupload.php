@@ -35,7 +35,7 @@ try {
     $link = isset($aws_cname) && $aws_cname == 1 ? str_replace("s3.amazonaws.com/", "", $result['ObjectURL']) : $result['ObjectURL'];
 
     // insert into db here
-    $conn->insert('images', ['name', 'type'], [$_FILES['file']['name'], $_FILES['file']['type']]);
+    $conn->insert('images', ['name', 'type', 'link'], [$_FILES['file']['name'], $_FILES['file']['type'], $link]);
 
     header('Content-Type: text/plain');
     echo $link;

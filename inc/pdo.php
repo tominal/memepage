@@ -28,8 +28,13 @@ class conn {
       `id` int(11) auto_increment primary key not null,
       `name` varchar(50) not null,
       `type` varchar(50) not null,
+      `link` varchar(255) not null,
       `tags` json,
       `ratings` json
+    ); CREATE TABLE IF NOT EXISTS `tags` (
+      `id` int(11) auto_increment primary key not null,
+      `name` varchar(32) not null,
+      `desc` varchar(32)
     );");
   }
 
@@ -50,7 +55,7 @@ class conn {
     return $results;
   }
 
-  public function select($cols, $table, $where){
+  public function select($cols, $table, $where = []){
     $results = null;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
@@ -62,7 +67,8 @@ class conn {
         $results = $sel->fetch(PDO::FETCH_ASSOC);
       } else {
         $sql = 'SELECT '.(is_array($cols)?impCols($cols):$cols).' FROM '.$table;
-        $results = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+        // var_dump($sql);die();
+        $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       }
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
