@@ -5,7 +5,7 @@
   <div class="container">
     <div class="collapse navbar-collapse" id="navbarNav">
       <a class="navbar-brand">
-        <img src="https://cdn.thomasj.me/assets/img/pepe32.png" alt="">
+        <img src="./assets/img/pepe32.png" alt="">
         MemePage
       </a>
       <ul class="navbar-nav mr-auto">

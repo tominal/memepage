@@ -28,10 +28,12 @@ if(isset($_GET['xhr']))
     <meta name="csrf-token" content="<?= csrf() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MemePage</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/primer-tooltips@1.5.7/build/build.css">
     <link rel="stylesheet" href="//cdn.thomasj.me/assets/css/bootstrap4.1.min.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 
-    <script src="//cdn.thomasj.me/assets/js/jquery3.js" charset="utf-8"></script>
-    <script src="//cdn.thomasj.me/assets/js/bootstrap4.1.min.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" charset="utf-8"></script>
   </head>
   <body>
     <?php require(__DIR__.'/inc/nav.php'); ?>

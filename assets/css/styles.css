@@ -1,0 +1,22 @@
+/* i would show case my sass skills and compile this in sass, but idc */
+.card-img-top {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+}
+.hideOverflow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.copyMeme {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
