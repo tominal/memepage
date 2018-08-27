@@ -17,7 +17,7 @@ $s3 = new S3Client([
 ]);
 
 if ($_FILES['file']['error'] !== UPLOAD_ERR_OK){
-  echo "no file uwu";
+  echo "file error uwu: ".$_FILES['file']['error'];
   exit;
 }
 

@@ -1,5 +1,5 @@
 /* i would show case my sass skills and compile this in sass, but idc */
-.card-img-top {
+.copyMeme .hideOverflow .card-img-top {
   position: absolute;
   width: auto;
   height: 100%;
@@ -7,7 +7,7 @@
   left:50%;
   transform:translate(-50%, -50%);
 }
-.hideOverflow {
+.copyMeme .hideOverflow {
   position: absolute;
   top: 0;
   left: 0;

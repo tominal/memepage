@@ -36,6 +36,10 @@ class conn {
       `name` varchar(32) not null,
       `desc` varchar(32)
     );");
+   //  CREATE TABLE `memepage_settings` (
+   //   `id` int(11) auto_increment primary key not null,
+   //   `auto_sfw` tinyint(1) default 1 not null,
+   // );
   }
 
   public function getPdo(){
@@ -46,7 +50,8 @@ class conn {
     $results = null;
     try {
       $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
-      $results = $pdo->query($sql)->fetchAll();
+      $query = $pdo->query($sql);
+      $results = $query ? $query->fetchAll(PDO::FETCH_ASSOC) : false;
       $pdo = null;
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
@@ -67,9 +72,24 @@ class conn {
         $results = $sel->fetch(PDO::FETCH_ASSOC);
       } else {
         $sql = 'SELECT '.(is_array($cols)?impCols($cols):$cols).' FROM '.$table;
-        // var_dump($sql);die();
         $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       }
+    } catch(PDOException $e){
+      print "Error: ".$e->getMessage();
+      exit;
+    }
+    return $results;
+  }
+
+  public function raw($sql, $vals = []){
+    $results = null;
+    try {
+      $pdo = new PDO("mysql:host=$this->host;dbname=$this->db", $this->user, $this->pass);
+      if(count($vals) > 0){
+        $raw = $pdo->prepare($sql);
+        $results = $raw->execute($vals)->fetchAll(PDO::FETCH_ASSOC);
+      } else
+        $results = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     } catch(PDOException $e){
       print "Error: ".$e->getMessage();
       exit;

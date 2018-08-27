@@ -3,13 +3,16 @@
 $conn = $GLOBALS['conn'];
 
 $tags = $conn->select('*', 'tags');
-$imgs = $conn->select('*', 'images');
+$imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]');");
 
 ?>
 
 <h1>browse by tag 🤣</h1>
 <div class="card">
   <div class="card-body">
+    <?php if(!$imgs){ ?>
+      <div class="alert alert-primary text-center" style="margin-bottom:0">no tags here!</div>
+    <?php } ?>
     <?php //foreach($tags as $tag){ ?>
       <!-- <button type="button" class="btn btn-primary">
         Notifications <span class="badge badge-light">4</span>
@@ -19,6 +22,10 @@ $imgs = $conn->select('*', 'images');
 </div>
 
 <hr/>
+
+<?php if(!$imgs){ ?>
+<div class="alert alert-primary text-center">no images here!</div>
+<?php } ?>
 
 <div class="row">
   <?php foreach($imgs as $img){ ?>
