@@ -35,11 +35,11 @@ class conn {
       `id` int(11) auto_increment primary key not null,
       `name` varchar(32) not null,
       `desc` varchar(32)
-    );");
-   //  CREATE TABLE `memepage_settings` (
-   //   `id` int(11) auto_increment primary key not null,
-   //   `auto_sfw` tinyint(1) default 1 not null,
-   // );
+    );");/* CREATE TABLE IF NOT EXISTS `memepage_settings` (
+	  `tables_written` tinyint(1) primary key not null,
+	  `auto_sfw` tinyint(1) not null,
+	  `auto_copy` tinyint(1) not null,
+	);"); INSERT INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) VALUES (1,0,1);*/
   }
 
   public function getPdo(){
