@@ -51,7 +51,7 @@
 	  };
 	  </script>
 	  
-	  <?php if($_SESSION['scope']){ $conn = $GLOBALS['conn']; $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, NULL);"); ?>
+	  <?php if($_SESSION['scope']){ $conn = $GLOBALS['conn']; $imgs = $conn->query("SELECT * FROM `images` WHERE tags is null;"); ?>
 		<h3>Untagged memes</h3>
 		<?php if(!$imgs){ ?>
 		  <div class="alert alert-primary text-center">no images here!</div>
