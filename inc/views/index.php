@@ -40,6 +40,7 @@ $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]'
       </div>
     </div>
   <?php } ?>
+  <p>next, onclick of the name: open meme bs modal</p>
 </div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js" charset="utf-8"></script>
