@@ -40,7 +40,7 @@ $users = $conn->select('*', 'users');
 	    </div>
 		<div class="col-6">
 		  <div class="form-group">
-			<label>Auto-Copy</label>
+			<label>Auto-Copy &sdot; <small>On click, copy direct link to meme.</small></label>
 			<input type="checkbox" name="auto_copy">
 		  </div>
 		</div>
