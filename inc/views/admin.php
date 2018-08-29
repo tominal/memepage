@@ -1,6 +1,9 @@
 <?php
 
+mid();
+
 $conn = $GLOBALS['conn'];
+$settings = $GLOBALS['settings'];
 $users = $conn->select('*', 'users');
 
 ?>
@@ -30,22 +33,25 @@ $users = $conn->select('*', 'users');
     </div>
 
     <h3 id="privacy">Privacy</h3>
-	<form class="form" method="post" action="./?page=submitSettings">
-	  <div class="row">
-	    <div class="col-6">
-		  <div class="form-group">
-			<label>Auto-SFW &sdot; <small>Make everything uploaded public.</small></label>
-			<input type="checkbox" name="auto_sfw">
-		  </div>
-	    </div>
-		<div class="col-6">
-		  <div class="form-group">
-			<label>Auto-Copy &sdot; <small>On click, copy direct link to meme.</small></label>
-			<input type="checkbox" name="auto_copy">
-		  </div>
-		</div>
-	  </div>
-	</form>
+  	<form class="form" method="post" action="./?page=submitSettings">
+  	  <div class="row">
+  	    <div class="col-6">
+    		  <div class="form-group">
+      			<label>Auto-SFW &sdot; <small>Make everything uploaded public.</small></label>
+      			<input type="checkbox" <?= $settings['auto_sfw'] ? 'checked' : '' ?> name="auto_sfw">
+    		  </div>
+  	    </div>
+    		<div class="col-6">
+    		  <div class="form-group">
+      			<label>Auto-Copy &sdot; <small>On click, copy direct link to meme.</small></label>
+      			<input type="checkbox" <?= $settings['auto_copy'] ? 'checked' : '' ?> name="auto_copy">
+    		  </div>
+    		</div>
+  	  </div>
+      <div class="form-group text-right">
+        <input type="submit" class="btn btn-success" value="Save">
+      </div>
+  	</form>
 
   </div>
 </div>

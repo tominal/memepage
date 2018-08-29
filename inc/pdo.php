@@ -35,11 +35,11 @@ class conn {
       `id` int(11) auto_increment primary key not null,
       `name` varchar(32) not null,
       `desc` varchar(32)
-    );");/* CREATE TABLE IF NOT EXISTS `memepage_settings` (
+    ); CREATE TABLE IF NOT EXISTS `memepage_settings` (
 	  `tables_written` tinyint(1) primary key not null,
 	  `auto_sfw` tinyint(1) not null,
-	  `auto_copy` tinyint(1) not null,
-	);"); INSERT INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) VALUES (1,0,1);*/
+	  `auto_copy` tinyint(1) not null
+  ); INSERT INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) SELECT * FROM (SELECT 1, 0, 1) AS tmp WHERE NOT EXISTS ( SELECT tables_written FROM `memepage_settings` WHERE tables_written = 1) LIMIT 1;");
   }
 
   public function getPdo(){

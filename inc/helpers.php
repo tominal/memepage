@@ -46,12 +46,8 @@ function impCols($arr){
 // return
 function umpCols($arr){
   $str = "";
-  $c = count($arr);
-  if($c > 0){
-    foreach($arr as $k => $v)
-      $str .= $v.' = ?'.($c == $k+1 ? ', ' : '');
-  } else
-    $str = $v.' = ?';
+  foreach($arr as $k => $v)
+    $str .= $v.' = ?'.(count($arr) !== $k+1 ? ', ' : '');
   return $str;
 }
 
@@ -61,6 +57,14 @@ function qs($arr){
   for($i = 1;$i <= count($arr);$i++)
     $str .= ($i == count($arr) ? '?' : '?, ');
   return $str;
+}
+
+// scope middleware
+function mid(){
+  if(!$_SESSION['scope']){
+    header('Location: ./?page=403');
+    exit;
+  }
 }
 
 // delete session
