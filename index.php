@@ -36,6 +36,44 @@ if(isset($_GET['xhr']))
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      function loadMeme(name, link, clipboard){
+        var column = $(document.createElement("div")).addClass('col-2');
+        var card = $(document.createElement("div")).addClass('card');
+        var meme = $(document.createElement("div")).addClass(clipboard ? 'copyMeme' : 'Meme');
+        var cardBody = $(document.createElement("div")).addClass('card-body');
+        var name = $(document.createElement("p")).addClass("card-text").attr('data-toggle', 'modal').attr('data-target', '#memeModal').html(name);
+        var img = $(document.createElement("img")).addClass('card-img-top').attr('src',link);
+        if(clipboard){
+          meme.attr('data-clipboard-text', link);
+          var overflow = $(document.createElement("span")).addClass("hideOverflow");
+          overflow.append(img);
+          meme.append(overflow);
+        } else
+          meme.append(img);
+        cardBody.append(name);
+        card.append(meme);
+        card.append(cardBody);
+        column.append(card);
+        $('.memes.row').append(column);
+        /*<div class="col-2">
+          <div class="card">
+            if(clipboard){
+              <div class="copyMeme" data-clipboard-text="link">
+                <span class="hideOverflow">
+                  <img class="card-img-top" src="link" alt="">
+                </span>
+              </div>
+            } else {
+              <div class="Meme">
+                <img class="card-img-top" src="link" alt="">
+              </div>
+            }
+            name
+          </div>
+        </div>*/
+      }
+    </script>
   </head>
   <body>
     <?php require(__DIR__.'/inc/nav.php'); ?>
@@ -45,5 +83,26 @@ if(isset($_GET['xhr']))
     <div class="footer">
       <?php //echo var_dump($_SESSION); ?>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      function clearTooltip(e){
+        e.currentTarget.setAttribute('class','copyMeme');
+        e.currentTarget.removeAttribute('aria-label');
+      }
+      function showTooltip(e){
+        e.setAttribute('class','copyMeme tooltipped tooltipped-n tooltipped-no-delay border p-2');
+        e.setAttribute("aria-label","Copied!");
+      }
+
+      var clipboard = new ClipboardJS('.copyMeme');
+      clipboard.on('success', function(e){
+        e.clearSelection();
+        showTooltip(e.trigger);
+      });
+
+      var btns = document.querySelectorAll('.copyMeme');
+      for(var i = 0;i<btns.length;i++)
+        btns[i].addEventListener('mouseleave',clearTooltip);
+    </script>
   </body>
 </html>

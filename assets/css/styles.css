@@ -33,3 +33,9 @@
   width: 160px;
   height: 160px;
 }
+.card-body {
+  padding: 5px;
+}
+.card-text {
+  cursor: pointer;
+}

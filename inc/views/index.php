@@ -28,46 +28,13 @@ $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]'
 <div class="alert alert-primary text-center">no images here!</div>
 <?php } ?>
 
-<div class="row">
-  <?php foreach($imgs as $img){ ?>
-    <div class="col-2">
-      <div class="card">
-        <?php if($settings['auto_copy']){ ?>
-          <div class="copyMeme" data-clipboard-text="<?= $img['link'] ?>">
-            <span class="hideOverflow">
-              <img class="card-img-top" src="<?= $img['link'] ?>" alt="">
-            </span>
-          </div>
-        <?php } else { ?>
-          <div class="Meme">
-            <img class="card-img-top" src="<?= $img['link'] ?>" alt="">
-          </div>
-        <?php } ?>
-        <?= $img['name'] ?>
-      </div>
-    </div>
-  <?php } ?>
+<div class="memes row">
+  <script type="text/javascript">
+    var imgs = <?= json_encode($imgs); ?>;
+    imgs.forEach(function(e){
+      if(e.type == "image/gif" || e.type == "image/png" || e.type == "image/jpeg")
+        loadMeme(e.name, e.link, <?= $settings['auto_copy'] ?>);
+    });
+  </script>
   <p>next, onclick of the name: open meme bs modal</p>
 </div>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js" charset="utf-8"></script>
-<script type="text/javascript">
-  function clearTooltip(e){
-    e.currentTarget.setAttribute('class','copyMeme');
-    e.currentTarget.removeAttribute('aria-label');
-  }
-  function showTooltip(e){
-    e.setAttribute('class','copyMeme tooltipped tooltipped-n tooltipped-no-delay border p-2');
-    e.setAttribute("aria-label","Copied!");
-  }
-
-  var clipboard = new ClipboardJS('.copyMeme');
-  clipboard.on('success', function(e){
-    e.clearSelection();
-    showTooltip(e.trigger);
-  });
-
-  var btns = document.querySelectorAll('.copyMeme');
-  for(var i = 0;i<btns.length;i++)
-    btns[i].addEventListener('mouseleave',clearTooltip);
-</script>
