@@ -1,6 +1,6 @@
 <?php
 
-$page = isset($_GET['page']) ? $_GET['page'] : 'index';
+$page = $GLOBALS['page'];
 
 function page() {
   global $page;

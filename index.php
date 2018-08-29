@@ -13,6 +13,8 @@
 ini_set("display_errors", "-1");
 error_reporting(E_ALL);
 
+$page = isset($_GET['page']) ? $_GET['page'] : 'index';
+
 require_once(__DIR__.'/inc/helpers.php');
 require_once(__DIR__.'/inc/pdo.php');
 require_once(__DIR__.'/inc/auth.php');
@@ -51,7 +53,33 @@ if(isset($_GET['xhr']))
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body"></div>
+            <div class="modal-body">
+              <div class="meme"></div>
+              <hr/>
+              <?php if($_SESSION['scope']){ ?>
+                <form class="form" action="./?page=submitMeme&returnto=<?= $page ?>" method="post">
+                  <input type="hidden" name="id" value="">
+                  <div class="form-row">
+                    <div class="col">
+                      <label>Name</label>
+                      <input type="text" name="name" value="" class="form-control">
+                    </div>
+                    <div class="col">
+                      <label>Tags</label>
+                      <textarea name="tags" class="form-control"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col">
+                      <br/>
+                      <div class="form-group text-right">
+                        <input type="submit" class="btn btn-success" value="Save">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              <?php } ?>
+            </div>
             <div class="modal-footer">
 
             </div>
@@ -65,21 +93,21 @@ if(isset($_GET['xhr']))
     <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.js" charset="utf-8"></script>
     <script type="text/javascript">
       function clearTooltip(e){
-        e.currentTarget.setAttribute('class','copyMeme');
+        e.currentTarget.setAttribute('class','Meme');
         e.currentTarget.removeAttribute('aria-label');
       }
       function showTooltip(e){
-        e.setAttribute('class','copyMeme tooltipped tooltipped-n tooltipped-no-delay border p-2');
+        e.setAttribute('class','Meme tooltipped tooltipped-n tooltipped-no-delay border p-2');
         e.setAttribute("aria-label","Copied!");
       }
 
-      var clipboard = new ClipboardJS('.copyMeme');
+      var clipboard = new ClipboardJS('.Meme');
       clipboard.on('success', function(e){
         e.clearSelection();
         showTooltip(e.trigger);
       });
 
-      var btns = document.querySelectorAll('.copyMeme');
+      var btns = document.querySelectorAll('.Meme');
       for(var i = 0;i<btns.length;i++)
         btns[i].addEventListener('mouseleave',clearTooltip);
     </script>
