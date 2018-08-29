@@ -36,49 +36,28 @@ if(isset($_GET['xhr']))
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" charset="utf-8"></script>
-    <script type="text/javascript">
-      function loadMeme(name, link, clipboard){
-        var column = $(document.createElement("div")).addClass('col-2');
-        var card = $(document.createElement("div")).addClass('card');
-        var meme = $(document.createElement("div")).addClass(clipboard ? 'copyMeme' : 'Meme');
-        var cardBody = $(document.createElement("div")).addClass('card-body');
-        var name = $(document.createElement("p")).addClass("card-text").attr('data-toggle', 'modal').attr('data-target', '#memeModal').html(name);
-        var img = $(document.createElement("img")).addClass('card-img-top').attr('src',link);
-        if(clipboard){
-          meme.attr('data-clipboard-text', link);
-          var overflow = $(document.createElement("span")).addClass("hideOverflow");
-          overflow.append(img);
-          meme.append(overflow);
-        } else
-          meme.append(img);
-        cardBody.append(name);
-        card.append(meme);
-        card.append(cardBody);
-        column.append(card);
-        $('.memes.row').append(column);
-        /*<div class="col-2">
-          <div class="card">
-            if(clipboard){
-              <div class="copyMeme" data-clipboard-text="link">
-                <span class="hideOverflow">
-                  <img class="card-img-top" src="link" alt="">
-                </span>
-              </div>
-            } else {
-              <div class="Meme">
-                <img class="card-img-top" src="link" alt="">
-              </div>
-            }
-            name
-          </div>
-        </div>*/
-      }
-    </script>
+    <script src="./assets/js/scripts.js" charset="utf-8"></script>
   </head>
   <body>
     <?php require(__DIR__.'/inc/nav.php'); ?>
     <div class="container">
       <?php page(); ?>
+      <div class="modal" id="memeModal" tabindex="-1" role="dialog" aria-labelledby="memeModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer">
       <?php //echo var_dump($_SESSION); ?>

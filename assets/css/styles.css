@@ -20,6 +20,16 @@
   width: 160px;
   height: 160px;
 }
+.copyMeme.border {
+  border-radius: 4px;
+}
+.copyMeme:active {
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+.rawMeme {
+  max-width: 100%;
+}
 .Meme .card-img-top {
   position: absolute;
   width: auto;
@@ -36,6 +46,6 @@
 .card-body {
   padding: 5px;
 }
-.card-text {
+.card-img-top, .card-text {
   cursor: pointer;
 }

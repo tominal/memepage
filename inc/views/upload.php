@@ -1,3 +1,9 @@
+<?php
+
+$settings = $GLOBALS['settings'];
+
+?>
+
 <style>
   .dz-default {
     padding: 40px 15px;
@@ -50,27 +56,22 @@
 		}
 	  };
 	  </script>
-	  
+
 	  <?php if($_SESSION['scope']){ $conn = $GLOBALS['conn']; $imgs = $conn->query("SELECT * FROM `images` WHERE tags is null;"); ?>
 		<h3>Untagged memes</h3>
 		<?php if(!$imgs){ ?>
 		  <div class="alert alert-primary text-center">no images here!</div>
 		<?php } ?>
-		
-		<div class="row">
-		<?php foreach($imgs as $img){ ?>
-		  <div class="col-2">
-		  <div class="card">
-			<div class="copyMeme" data-clipboard-text="<?= $img['link'] ?>">
-			  <span class="hideOverflow">
-				<img class="card-img-top" src="<?= $img['link'] ?>" alt="">
-			  </span>
-			</div>
-			<?= $img['name'] ?>
-		  </div>
-		</div>
-		<?php } ?>
-		</div>
+
+    <div class="memes row">
+      <script type="text/javascript">
+        var imgs = <?= json_encode($imgs); ?>;
+        imgs.forEach(function(e){
+          if(e.type == "image/gif" || e.type == "image/png" || e.type == "image/jpeg")
+            loadMeme(e, <?= $settings['auto_copy'] ?>);
+        });
+      </script>
+    </div>
 	  <?php } ?>
 
     <?php } ?>

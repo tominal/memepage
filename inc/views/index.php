@@ -33,8 +33,7 @@ $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]'
     var imgs = <?= json_encode($imgs); ?>;
     imgs.forEach(function(e){
       if(e.type == "image/gif" || e.type == "image/png" || e.type == "image/jpeg")
-        loadMeme(e.name, e.link, <?= $settings['auto_copy'] ?>);
+        loadMeme(e, <?= $settings['auto_copy'] ?>);
     });
   </script>
-  <p>next, onclick of the name: open meme bs modal</p>
 </div>
