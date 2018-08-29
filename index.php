@@ -35,7 +35,7 @@ if(isset($_GET['xhr']))
     <link rel="stylesheet" href="./assets/css/styles.css">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" charset="utf-8"></script>
   </head>
   <body>
     <?php require(__DIR__.'/inc/nav.php'); ?>

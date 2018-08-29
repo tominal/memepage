@@ -1,6 +1,7 @@
 <?php
 
 $conn = $GLOBALS['conn'];
+$settings = $GLOBALS['settings'];
 
 $tags = $conn->select('*', 'tags');
 $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]');");
@@ -31,11 +32,17 @@ $imgs = $conn->raw("SELECT * FROM `images` WHERE JSON_CONTAINS(tags, '[\"sfw\"]'
   <?php foreach($imgs as $img){ ?>
     <div class="col-2">
       <div class="card">
-        <div class="copyMeme" data-clipboard-text="<?= $img['link'] ?>">
-          <span class="hideOverflow">
+        <?php if($settings['auto_copy']){ ?>
+          <div class="copyMeme" data-clipboard-text="<?= $img['link'] ?>">
+            <span class="hideOverflow">
+              <img class="card-img-top" src="<?= $img['link'] ?>" alt="">
+            </span>
+          </div>
+        <?php } else { ?>
+          <div class="Meme">
             <img class="card-img-top" src="<?= $img['link'] ?>" alt="">
-          </span>
-        </div>
+          </div>
+        <?php } ?>
         <?= $img['name'] ?>
       </div>
     </div>

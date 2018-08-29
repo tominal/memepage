@@ -39,7 +39,7 @@ class conn {
 	  `tables_written` tinyint(1) primary key not null,
 	  `auto_sfw` tinyint(1) not null,
 	  `auto_copy` tinyint(1) not null
-  ); INSERT INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) SELECT * FROM (SELECT 1, 0, 1) AS tmp WHERE NOT EXISTS ( SELECT tables_written FROM `memepage_settings` WHERE tables_written = 1) LIMIT 1;");
+  ); INSERT IGNORE INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) VALUES (1,0,1);");
   }
 
   public function getPdo(){
