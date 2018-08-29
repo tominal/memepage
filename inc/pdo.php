@@ -34,12 +34,14 @@ class conn {
     ); CREATE TABLE IF NOT EXISTS `tags` (
       `id` int(11) auto_increment primary key not null,
       `name` varchar(32) not null,
-      `desc` varchar(32)
+      `desc` varchar(32),
+      `images` json
     ); CREATE TABLE IF NOT EXISTS `memepage_settings` (
 	  `tables_written` tinyint(1) primary key not null,
 	  `auto_sfw` tinyint(1) not null,
 	  `auto_copy` tinyint(1) not null
-  ); INSERT IGNORE INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) VALUES (1,0,1);");
+  ); INSERT IGNORE INTO `memepage_settings` (tables_written, auto_sfw, auto_copy) VALUES (1,0,1);
+  INSERT IGNORE INTO `tags` (`id`, `name`, `desc`) VALUES (1, 'sfw', 'safe for work viewing');");
   }
 
   public function getPdo(){

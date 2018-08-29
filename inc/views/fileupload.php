@@ -3,6 +3,7 @@
 // handle multiple files to amazon s3 bucket here
 require __DIR__.'/../../vendor/autoload.php';
 require __DIR__.'/../config.php';
+$settings = $GLOBALS['settings'];
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
@@ -35,7 +36,7 @@ try {
     $link = isset($aws_cname) && $aws_cname == 1 ? str_replace("s3.amazonaws.com/", "", $result['ObjectURL']) : $result['ObjectURL'];
 
     // insert into db here
-    $conn->insert('images', ['name', 'type', 'link'], [$_FILES['file']['name'], $_FILES['file']['type'], $link]);
+    $conn->insert('images', ['name', 'type', 'link', 'tags'], [$_FILES['file']['name'], $_FILES['file']['type'], $link, $settings['auto_sfw'] ? '["sfw"]' : null]);
 
     header('Content-Type: text/plain');
     echo $link;
