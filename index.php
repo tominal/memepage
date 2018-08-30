@@ -56,7 +56,7 @@ if(isset($_GET['xhr']))
             <div class="modal-body">
               <div class="meme"></div>
               <hr/>
-              <?php if($_SESSION['scope']){ ?>
+              <?php if(isset($_SESSION['scope']) && $_SESSION['scope']){ ?>
                 <form class="form" action="./?page=submitMeme&returnto=<?= $page ?>" method="post">
                   <input type="hidden" name="id" value="">
                   <div class="form-row">
