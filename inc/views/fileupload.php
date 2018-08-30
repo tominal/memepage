@@ -25,7 +25,7 @@ if ($_FILES['file']['error'] !== UPLOAD_ERR_OK){
 try {
     $conn = $GLOBALS['conn'];
 
-    // Create thumbnail of image using ImageMagick (composer package)
+    // Create thumbnail of image using ImageMagick
     // render 160x160 thumbnail here, then putObject in thumbs/
 
     // Upload data.

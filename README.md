@@ -28,6 +28,7 @@ What's the solution?
     * How to create a public bucket.
     * How to forward the bucket through CloudFront.
 * #### A server with MySQL & PHP 7+.
+    * php-imagick ```sudo apt install php-imagick```
 * #### Basic Google API knowledge.
     * Create a Google + API project.
     * Set up your OAuth consent screen.
