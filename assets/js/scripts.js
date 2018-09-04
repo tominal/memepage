@@ -32,7 +32,7 @@ function loadRaw(type, link){
   return image;
 }
 function loadMeme(m, clipboard){
-  var column = $(document.createElement("div")).addClass('col-2');
+  var column = $(document.createElement("div")).addClass('col-6 col-sm-6 col-md-3 col-lg-2');
   var card = $(document.createElement("div")).addClass('card');
   var meme = $(document.createElement("div")).addClass('Meme');
   var cardBody = $(document.createElement("div")).addClass('card-body');
