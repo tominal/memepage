@@ -57,7 +57,7 @@ $settings = $GLOBALS['settings'];
 	  };
 	  </script>
 
-	  <?php if($_SESSION['scope']){ $conn = $GLOBALS['conn']; $imgs = $conn->query("SELECT * FROM `images` WHERE tags is null;"); ?>
+	  <?php if($_SESSION['scope']){ $conn = $GLOBALS['conn']; $imgs = $conn->query("SELECT * FROM `images` WHERE tags is null OR tags = '[\"\"]';"); ?>
 		<h3>Untagged memes</h3>
 		<?php if(!$imgs){ ?>
 		  <div class="alert alert-primary text-center">no images here!</div>
