@@ -38,3 +38,9 @@ A "cloud" solution for storing memes of types png, jpg, gif, & webm.
 1. Finish tagging system.
 1. Finish ImageMagick thumbnailing
     * which apparently uses ffmpeg 'under the hood'
+
+```
+async getCurrentLocation() {
+  try {
+    let localtime= await.this.geolocation.getCurrentPosition()
+```
