@@ -3,8 +3,8 @@
 /**
  *
  *  Project: MemePage
- *  Author: Thomas Johnson
- *  Website: https://thomasj.me
+ *  Author: Thomas Johnson & Brice Allard
+ *  Website: https://thomasj.me - https://bricewa.me
  *  Description:
  *    A web program combining dropbox and imgur.
  *
